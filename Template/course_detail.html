@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load static %}
+{% block main %}
+
+ 
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+        <div class="flex justify-between items-center mb-6">
+          <h1 class="text-3xl font-extrabold text-gray-900">
+            {{Course.cTitle}}
+          </h1>
+          <button
+            id="startCourseBtn"
+            class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Start Course
+            <svg
+              class="ml-3 -mr-1 h-5 w-5"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10.293 15.707a1 1 0 010-1.414L14.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z"
+                clip-rule="evenodd"
+              />
+              <path
+                fill-rule="evenodd"
+                d="M4.293 15.707a1 1 0 010-1.414L8.586 10l-4.293-4.293a1 1 0 111.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <p class="text-lg text-gray-600 mb-6">
+          {{Course.description}}
+        </p>
+
+        <div class="flex items-center text-gray-700 mb-8">
+          <svg
+            class="h-5 w-5 mr-2 text-indigo-500"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+            ></path>
+          </svg>
+          <span class="font-medium">Total Course Time:</span>
+          <span class="ml-1">{{Course.ctime}}</span>
+        </div>
+
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">Modules</h2>
+        <div class="space-y-4">
+          <!-- Module 1 -->
+           {% for i in Module %}
+           <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+             <div class="flex justify-between items-center mb-2">
+               <h3 class="text-lg font-semibold text-gray-800">
+                 {{i.Module_Index}} : {{i.Module_Title}}
+                 {{i.course}}
+                </h3>
+              </div>
+              <p class="text-gray-600 text-sm mb-3">
+                {{i.Module_Detail}}
+              </p>
+              <div class="flex items-center">
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div
+                  class="bg-blue-900 h-2 rounded-full"
+                  style="width: 100%"
+                  ></div>
+                </div>
+                
+              </div>
+            </div>
+            
+            
+            {% endfor %}
+            
+      </div>
+    </main>
+    <script>
+      document
+        .getElementById("startCourseBtn")
+        .addEventListener("click", function () {
+          window.location.href = "../card_lern/{{Course.cTitle}}";
+        });
+  
+      document
+        .getElementById("continueLearningBtn")
+        .addEventListener("click", function () {
+          window.location.href = "../card_lern/{{Course.cTitle}}";
+        });
+    </script>
+    
+{% endblock main %}

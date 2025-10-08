@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flashy Cards - Learn to Code with Flashcards</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href='{% static "css/home.css" %}' />
+  </head>
+   <body class="bg-gray-50 min-h-screen font-sans">
+
+    <div class="min-h-screen flex items-center justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-md w-full space-y-8 p-10 bg-white rounded-xl shadow-lg">
+            <div class="text-center">
+                <h2 class="mt-6 text-3xl font-extrabold text-gray-900">
+                    Create Your Flashy Cards Account
+                </h2>
+                <p class="mt-2 text-sm text-gray-600">
+                    Start mastering coding concepts today!
+                </p>
+             </div>
+
+            <form class="mt-8 space-y-6" action="" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+                <div class="rounded-md shadow-sm -space-y-px">
+                    <!-- Profile Picture -->
+                    <div class="mb-6 text-center">
+                      <label for="profile-picture" class="block text-sm font-medium text-gray-700 mb-2">Profile Picture</label>
+                      <div class="mt-1 flex justify-center">
+                        <img id="profile-picture-preview" class="h-24 w-24 rounded-full object-cover bg-gray-100" src="" alt="Profile Preview" style="display:none;" />
+                        <span id="default-avatar" class="inline-block h-24 w-24 rounded-full overflow-hidden bg-gray-100">
+                          <svg class="h-full w-full text-gray-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+                          </svg>
+                        </span>
+                      </div>
+                      <input type="file" name="image" accept="image/*" id="profile-picture" class="sr-only" >
+                      <label for="profile-picture" class="mt-3 cursor-pointer inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Upload Photo
+                      </label>
+                    </div>
+                
+                
+                    <!-- First Name -->
+                    <div>
+                      <label for="first-name" class="sr-only">First Name</label>
+                      <input id="first-name" name="first-name" type="text" autocomplete="given-name" required
+                        class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                        placeholder="First Name">
+                    </div>
+                    <!-- Last Name -->
+                    <div>
+                      <label for="last-name" class="sr-only">Last Name</label>
+                      <input id="last-name" name="last-name" type="text" autocomplete="family-name" required
+                        class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                        placeholder="Last Name">
+                    </div>
+                    <!-- Occupation -->
+                    <div>
+                        <label for="occupation" class="sr-only">Occupation</label>
+                        <input id="occupation" name="occupation" type="text" autocomplete="organization-title"
+                        class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                        placeholder="Occupation (e.g., Web Developer, Student)">
+                    </div>
+
+                    <!-- Location -->
+                     <div>
+                      <label for="location" class="sr-only">Last Name</label>
+                      <input id="location" name="location" type="text" autocomplete="family-name" required
+                        class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                        placeholder="Location">
+                    </div>
+
+                    
+                    <!-- Mobile number -->
+                     <div>
+                      <label for="num" class="sr-only">Last Name</label>
+                      <input id="num" name="num" type="text" autocomplete="family-name" required
+                        class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                        placeholder="mobile Number">
+                    </div>
+
+                    <!-- Goal -->
+                     <div>
+                      <label for="goal" class="sr-only">Last Name</label>
+                      <input id="goal" name="goal" type="text" autocomplete="family-name" required
+                        class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                        placeholder="Goal">
+                    </div>
+
+                    <!-- Email Address -->
+                    <div>
+                        <label for="email-address" class="sr-only">Email address</label>
+                      <input id="email-address" name="email" type="email" autocomplete="email" required
+                        class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                        placeholder="Email address">
+                    </div>
+                    <!-- Password -->
+                    <div>
+                        <label for="password" class="sr-only">Password</label>
+                        <input id="password" name="password" type="password" required
+                        class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                        placeholder="Password">
+                    </div>
+                    
+                    <!-- confirm Password -->
+                    <div>
+                        <label for="cpassword" class="sr-only">Confirm Password</label>
+                        <input id="cpassword" name="cpassword" type="password" required
+                        class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                        placeholder="Re enter Password">
+                    </div>
+                </div>
+
+                <div>
+                    <button type="submit"
+                    class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                        <!-- Heroicon name: solid/lock-closed -->
+                        <svg class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd"
+                        d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                        clip-rule="evenodd" />
+                        </svg>
+                      </span>
+                      Sign up
+                    </button>
+                </div>
+
+                <div class="text-sm text-center">
+                    <a href="../login" class="font-medium text-indigo-600 hover:text-indigo-500">
+                        Already have an account? Login
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+    <script>
+      const fileInput = document.getElementById('profile-picture');
+      const previewImage = document.getElementById('profile-picture-preview');
+      const defaultAvatar = document.getElementById('default-avatar');
+      fileInput.addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            previewImage.src = e.target.result;
+            previewImage.style.display = 'inline-block';
+            defaultAvatar.style.display = 'none';
+          }
+          reader.readAsDataURL(file);
+        } else {
+          previewImage.src = '';
+          previewImage.style.display = 'none';
+          defaultAvatar.style.display = 'inline-block';
+        }
+      });
+
+      
+    </script>
+</html>

@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+{% load static %}
+{% block main %}
+
+<main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <div class="bg-white rounded-lg shadow-lg p-6 md:p-8">
+        <h1 class="text-3xl font-extrabold text-gray-900 text-center mb-4">
+          Flashcard Practice
+        </h1>
+        <p class="text-center text-gray-600 mb-8">Test your knowledge!</p>
+
+        <div class="flashcard-container mb-8">
+          <div class="flashcard" id="flashcard">
+            <div
+            class="flashcard-face flashcard-front flashcard-front-gradient"
+            >
+            <h2>Question</h2>
+            <p id="flashcard-question">What is the capital of France?</p>
+            </div>
+            <div class="flashcard-face flashcard-back flashcard-back-gradient">
+              <h2>Answer</h2>
+              <p id="flashcard-answer">Paris</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-center space-x-4 flashcard-navigation">
+          <button
+          id="prev-card"
+          class="bg-gray-200 text-gray-700 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+              fill-rule="evenodd"
+              d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                clip-rule="evenodd"
+                />
+            </svg>
+            Previous
+          </button>
+          <button
+          id="reveal-answer"
+            class="bg-indigo-500 text-white hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+          <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                clip-rule="evenodd"
+              />
+            </svg>
+            Reveal Answer
+          </button>
+          <button
+            id="next-card"
+            class="bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          >
+            Next
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <div class="progress-bar-container">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <div class="mt-4 text-center text-gray-600">
+          <p>
+            Card <span id="current-card-index">1</span> of
+            <span id="total-cards">3</span>
+          </p>
+        </div>
+
+        <div
+        id="completionMessage"
+        class="completion-message mt-8 text-center text-green-700 font-semibold text-xl"
+        >
+        🎉 Congratulations! You've completed the deck! 🎉
+      </div>
+    </div>
+  </main>
+  <!-- <script src="{% static 'js/card.js' %}"></script> -->
+   <script>
+    // *****************flash card*********************
+const flashcard = document.getElementById("flashcard");
+const flashcardQuestion = document.getElementById("flashcard-question");
+const flashcardAnswer = document.getElementById("flashcard-answer");
+const prevCardBtn = document.getElementById("prev-card");
+const revealAnswerBtn = document.getElementById("reveal-answer");
+const nextCardBtn = document.getElementById("next-card");
+const currentCardIndexSpan = document.getElementById("current-card-index");
+const totalCardsSpan = document.getElementById("total-cards");
+const progressBar = document.getElementById("progressBar");
+const completionMessage = document.getElementById("completionMessage");
+
+
+const demo="{{cdata}}";
+console.log(demo);
+
+function decodeHTMLEntities(str) {
+    const entities = {
+        '&#x27;': "'",
+        '&quot;': '"',
+        '&amp;': '&',
+        '&lt;': '<',
+        '&gt;': '>'
+    };
+    return str.replace(/(&#x27;|&quot;|&amp;|&lt;|&gt;)/g, match => entities[match]);
+}
+
+const cards=[];
+{% for i in cdata  %}
+
+cards.push({
+    front: decodeHTMLEntities('{{i.Front}}'),
+    back: decodeHTMLEntities('{{i.Back}}')
+  });
+{% endfor %}
+
+console.log(cards);
+
+
+
+
+
+let currentCardIndex = 0;
+
+function updateCard() {
+  flashcard.classList.remove("flipped"); // Ensure card is not flipped when changing content
+  flashcardQuestion.textContent = cards[currentCardIndex].front;
+  flashcardAnswer.textContent = cards[currentCardIndex].back;
+  currentCardIndexSpan.textContent = currentCardIndex + 1;
+  totalCardsSpan.textContent = cards.length;
+  updateProgressBar();
+  hideCompletionMessage(); // Hide message when navigating
+}
+
+function updateProgressBar() {
+  const progress = ((currentCardIndex + 1) / cards.length) * 100;
+  progressBar.style.width = `${progress}%`;
+}
+
+function showCompletionMessage() {
+  completionMessage.classList.add("show");
+}
+
+function hideCompletionMessage() {
+  completionMessage.classList.remove("show");
+}
+
+// Event Listeners
+// Removed the direct click listener on flashcard to give full control to the button
+// flashcard.addEventListener('click', () => {
+//   flashcard.classList.toggle('flipped');
+// });
+
+revealAnswerBtn.addEventListener("click", (e) => {
+  e.stopPropagation(); // Prevent any parent click handlers
+  flashcard.classList.toggle("flipped"); // Toggle the flipped class
+});
+
+prevCardBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  if (currentCardIndex > 0) {
+    currentCardIndex--;
+    updateCard();
+  }
+});
+
+nextCardBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  if (currentCardIndex < cards.length - 1) {
+    currentCardIndex++;
+    updateCard();
+  } else {
+    // Reached the end of the deck
+    showCompletionMessage();
+  }
+});
+
+// Initial load
+updateCard();
+
+   </script>
+
+
+
+    {% endblock main %}

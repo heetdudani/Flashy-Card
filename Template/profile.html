@@ -1,0 +1,311 @@
+{% extends "base.html" %}
+{% load static %}
+{% block main %}
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+  {% for i in IDdata  %}
+  {% if i.Email == uid %}
+  <!-- Profile Hero Section -->
+  <div class="relative bg-white rounded-lg shadow-xl overflow-hidden mb-12">
+        <div class="hero-gradient-bg h-48 sm:h-64 lg:h-79"></div>
+        <div
+        class="absolute top-32 sm:top-48 lg:top-64 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
+        >
+          <img
+            class="h-40 w-40 rounded-full object-cover border-6 border-white shadow-lg"
+            src= "{{i.dp.url}}"
+            alt="User profile picture"
+          />
+        </div>
+        <div class="pt-24 pb-8 text-center mt-16 sm:mt-20 lg:mt-7">
+          <h3 class="text-4xl font-extrabold text-gray-900 profile-name" id="pname">
+            {{i.First_Name}} {{i.Last_Name}}
+          </h3>
+          <p
+            class="text-xl text-indigo-600 font-semibold mt-1 profile-occupation"
+          >
+          {{i.Occupation}}
+        </p>
+        <p class="mt-2 text-gray-500"> {{i.Email}}</p>
+        <!-- <div class="mt-6">
+            <button
+              onclick="showEditModal()"
+              class="inline-flex items-center px-8 py-3 border border-transparent text-base font-medium rounded-full shadow-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-300 ease-in-out transform hover:scale-105"
+            >
+              <svg
+              class="-ml-1 mr-3 h-5 w-5"
+              xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+              <path
+                  d="M13.586 3.586a2 2 0 112.828 2.828l-7.793 7.793-2.828-2.828 7.793-7.793zM6.5 15.5l-4 1 1-4L12.293 6.293l2.828 2.828L6.5 15.5z"
+                  />
+              </svg>
+              Edit Profile
+            </button>
+          </div> -->
+        </div>
+      </div>
+      
+      <!-- Details Sections -->
+      <div class="grid grid-cols-1 gap-8">
+        <!-- Learning Status Card
+        <div
+          class="bg-white rounded-lg shadow-md p-6 card-hover-effect transition duration-300 ease-in-out"
+        >
+        <div class="flex items-center mb-4">
+            <div
+              class="flex-shrink-0 bg-indigo-100 text-indigo-600 rounded-full p-3"
+              >
+              <svg
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                >
+                <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253v-13zm0 0V4.566c0-.553-.447-1-1-1h-1.5c-.553 0-1 .447-1 1v3.293l-1.707-1.707.707-.708C4.346 4.361 5.68 4 7.5 4c1.82 0 3.154.361 4.293 1.146l.707.708-1.707 1.707V6.253z"
+                ></path>
+                </svg>
+                </div>
+                <h4 class="ml-4 text-xl font-bold text-gray-900">
+                  Learning Status
+                  </h4>
+                  </div>
+                  <ul class="space-y-3 text-gray-700">
+                    <li class="flex items-center">
+                      <span class="font-medium w-36">Current Focus:</span>
+                      <span>JavaScript Frameworks</span>
+                      </li>
+                      <li class="flex items-center">
+                        <span class="font-medium w-36">Decks Completed:</span>
+                        <span>12</span>
+                        </li>
+                        <li class="flex items-center">
+                          <span class="font-medium w-36">Total Cards Mastered:</span>
+                          <span>520</span>
+                          </li>
+                          <li class="flex items-center">
+                            <span class="font-medium w-36">Last Active:</span>
+                            <span>2 hours ago</span>
+                            </li>
+                            <li class="pt-2">
+                              <span class="font-medium block mb-1">Overall Progress:</span>
+                              <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                <div
+                                class="bg-indigo-600 h-2.5 rounded-full"
+                                style="width: 75%"
+                                ></div>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-1">
+                                  75% of learning goals achieved
+                                  </p>
+                                  </li>
+                                  </ul>
+                                  </div> -->
+                                  
+          <!-- Personal Details Card -->
+          <div style="display:grid; justify-content:center"
+          class="bg-white rounded-lg shadow-md p-6 card-hover-effect transition duration-300 ease-in-out"
+          >
+          <div class="flex items-center mb-4">
+            <div
+            class="flex-shrink-0 bg-purple-100 text-purple-600 rounded-full p-3"
+            >
+            <svg
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0h4m-4 0H5m14 0h-4"
+                  ></path>
+                </svg>
+            </div>
+            <h4 class="ml-4 text-xl font-bold text-gray-900">
+              Personal Details
+            </h4>
+          </div>
+          <ul class="space-y-3 text-gray-700">
+            <li class="flex items-center">
+              <span class="font-medium w-36">Location:</span>
+              <span class="profile-location"> {{i.location}}</span>
+            </li>
+            <li class="flex items-center">
+              <span class="font-medium w-36">Member Since:</span>
+              <span>{{i.member_since}}</span>
+            </li>
+            <li class="flex items-center">
+              <span class="font-medium w-36">Mobile:</span>
+              <span class="profile-mobile">{{i.mobile}}</span>
+            </li>
+            <li class="flex items-center">
+              <span class="font-medium w-36">Learning Goals:</span>
+              <span>{{i.goal}}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </main>
+    {% endif %}
+
+    {% endfor %}
+
+    
+    <script src='{% static "js/home.js" %}'></script>
+
+    <!-- Edit Profile Modal -->
+    <div
+      id="editProfileModal"
+      class="fixed z-50 inset-0 hidden overflow-y-auto"
+    >
+    <form action="POST" action="#">
+      {% csrf_token %}
+
+      <div
+      class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+      >
+        <div class="fixed inset-0 transition-opacity" onclick="hideEditModal()">
+          <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+        </div>
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen"
+          >&#8203;</span
+        >
+        <div
+          class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+        >
+          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <h3 class="text-lg leading-6 font-medium text-gray-900">
+              Edit Profile
+            </h3>
+            <div class="mt-4">
+              <div class="mb-4">
+                <label
+                class="block text-gray-700 text-sm font-bold mb-2"
+                for="profileImage"
+                >Profile Image</label
+                >
+                <input
+                  type="file"
+                  id="pImage"
+                  name="profileImage"
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  />
+                </div>
+              <div class="mb-4">
+                <label
+                  class="block text-gray-700 text-sm font-bold mb-2"
+                  for="firstName"
+                  >First Name</label
+                  >
+                  <input
+                  type="text"
+                  id="fName"
+                  name="firstName"
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                />
+              </div>
+              <div class="mb-4">
+                <label
+                  class="block text-gray-700 text-sm font-bold mb-2"
+                  for="lastName"
+                  >Last Name</label
+                >
+                <input
+                  type="text"
+                  id="lName"
+                  name="lastName"
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                />
+              </div>
+              <div class="mb-4">
+                <label
+                  class="block text-gray-700 text-sm font-bold mb-2"
+                  for="occupation"
+                  >Occupation</label
+                  >
+                  <input
+                  type="text"
+                  id="occupation"
+                  name="occup"
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label
+                  class="block text-gray-700 text-sm font-bold mb-2"
+                  for="gole"
+                  >Goal</label
+                  >
+                  <input
+                  type="text"
+                  id="gole"
+                  name="goal"
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label
+                  class="block text-gray-700 text-sm font-bold mb-2"
+                  for="location"
+                  >Location</label
+                  >
+                  <input
+                  type="text"
+                  id="location"
+                  name="loc"
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  />
+                </div>
+                <div class="mb-4">
+                  <label
+                  class="block text-gray-700 text-sm font-bold mb-2"
+                  for="mobile"
+                  >Mobile</label
+                  >
+                <input
+                  type="tel"
+                  id="mobile"
+                  name="num"
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+              <button
+              type="submit"
+              class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
+              >
+              Save
+            </button>
+            <button
+            onclick="hideEditModal()"
+            class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+            >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+    </div>
+  </main>
+
+<script>
+  const username = localStorage.getItem('uid');
+  console.log(username);
+  console.log('{{IDdata}}')
+ //document.getElementById('pname').textContent='{{IDdata.First_Name}}  {{IDdata.Last_Name}}';
+</script>
+
+  {% endblock main %}

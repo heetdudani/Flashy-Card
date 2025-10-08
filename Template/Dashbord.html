@@ -1,0 +1,406 @@
+{% extends "base.html" %} 
+{% load static %} 
+{% block main %}
+
+<link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+
+<!-- Hero Section -->
+<div class="bg-gradient-primary text-white">
+  <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 lg:py-16">
+    <div class="lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
+      <div>
+        <h2 class="text-3xl font-extrabold tracking-tight sm:text-4xl">
+          Master coding with <br />
+          <span class="text-indigo-200">Flashy Cards</span>
+        </h2>
+        <p class="mt-3 max-w-3xl text-lg leading-6 text-indigo-50">
+          Learn programming languages faster through spaced repetition and
+          interactive flashcards. Our scientifically-proven methods enhance
+          memory retention.
+        </p>
+        <div class="mt-8 sm:flex">
+          <div class="rounded-md shadow">
+            <a
+              href="#"
+              class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10"
+            >
+              Get Started
+            </a>
+          </div>
+          <div class="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
+            <a
+              href="#demo"
+              class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 bg-opacity-60 hover:bg-opacity-70 md:py-4 md:text-lg md:px-10"
+            >
+              Demo
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="mt-12 lg:mt-0">
+        <img
+          src="{% static "img/bg.png" %}"
+          alt="Person using Flashy Cards on laptop and mobile devices with cards flipping animation visible"
+          class="w-full rounded-lg shadow-xl"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main Content -->
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <!-- Featured Decks -->
+  <div class="mb-12">
+    <h2 class="text-2xl font-bold text-gray-900 mb-6">Featured Decks</h2>
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <!-- Deck 1 -->
+      {% for i in Course_name %}
+      
+      <div
+        class="bg-white overflow-hidden shadow rounded-lg hover:shadow-lg transition duration-300"
+      >
+        <div class="px-4 py-5 sm:p-6">
+          <div class="flex items-center">
+            <div class="flex-shrink-0 bg-indigo-500 rounded-md p-1 ">
+              <img class='h-9 w-9' src="{{i.logo.url}}" alt="">
+            </div>
+            <div class="ml-5 w-0 flex-1">
+              <dt class="text-sm font-medium text-gray-500 truncate">
+                {{i.Course_Title}}
+              </dt>
+              <dd class="flex items-baseline">
+                <div class="text-2xl font-semibold text-gray-900">{{i.Course_syllabus}}</div>
+              </dd>
+            </div>
+          </div>
+          <div class="mt-4">
+            <div class="flex justify-between text-sm text-gray-500">
+              <span>{{i.Course_level}}</span>
+              <span>{{i.Course_time}}</span>
+            </div>
+            <div
+              class="mt-1 overflow-hidden h-2 text-xs flex rounded bg-gray-200"
+            >
+              <div
+                style="width: 100%"
+                class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-indigo-500"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      <!--Deck 2--> 
+      
+
+        <div 
+        style="display:flex; align-content:center; align-items:center;justify-content:center;"
+        class="bg-white overflow-hidden shadow rounded-lg hover:shadow-lg transition duration-300"
+        >
+        <a href="../course">
+
+          <span  class="lnr lnr-menu"></span>
+        </a>
+      </div>
+    
+      
+    </div>
+  <!-- Flashcard Demo Section -->
+  <div class="mb-12 bg-white rounded-lg shadow-lg overflow-hidden" id="demo">
+    <div class="bg-indigo-700 px-6 py-4">
+      <h2 class="text-xl font-bold text-white">Try a Flashcard</h2>
+    </div>
+    <div class="p-6">
+      <div class="card-container mx-auto" style="width: 100%; max-width: 600px">
+        <div class="card relative" id="demo-card">
+          <div
+            class="card-front bg-white border border-gray-200 rounded-lg shadow-md p-6 h-full"
+          >
+            <div class="flex justify-between items-center mb-4">
+              <span class="text-sm font-medium text-indigo-600"
+                >JavaScript Basics</span
+              >
+              <span class="text-xs text-gray-500">Front</span>
+            </div>
+            <div class="text-center py-10">
+              <h3 class="text-xl font-semibold mb-4">
+                What is the difference between <code>let</code> and
+                <code>const</code> in JavaScript?
+              </h3>
+              <button
+                onclick="flipCard()"
+                class="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none"
+              >
+                Reveal Answer
+              </button>
+            </div>
+          </div>
+          <div
+            class="card-back absolute top-0 left-0 w-full h-full bg-indigo-50 border border-gray-200 rounded-lg shadow-md p-6"
+            style="transform: rotateY(180deg)"
+          >
+            <div class="flex justify-between items-center mb-4">
+              <span class="text-sm font-medium text-indigo-600"
+                >JavaScript Basics</span
+              >
+              <span class="text-xs text-gray-500">Back</span>
+            </div>
+            <div class="py-10">
+              <div class="prose max-w-none text-left">
+                <p>
+                  <code>let</code> allows you to declare variables that can be
+                  reassigned:
+                </p>
+                <pre
+                  class="bg-gray-100 p-2 rounded-md mb-4"
+                ><code>let counter = 0;
+              counter = 1; // Valid</code></pre>
+                <p>
+                  <code>const</code> creates a read-only reference to a value
+                  (but the value itself can still be mutable if it's an object
+                  or array):
+                </p>
+                <pre
+                  class="bg-gray-100 p-2 rounded-md"
+                ><code>const PI = 3.14159;
+                PI = 4; // Error!
+                
+                const user = { name: 'John' };
+                user.name = 'Jane'; // Valid</code></pre>
+              </div>
+              <div class="mt-6 flex justify-center">
+                <button
+                  onclick="flipCard()"
+                  class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none"
+                >
+                  Flip Back
+                </button>
+                <button
+                  onclick="nextCard()"
+                  class="ml-4 inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none"
+                >
+                  Next Card
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features Section -->
+  <div class="mb-12">
+    <div class="text-center mb-10">
+      <h2 class="text-3xl font-bold text-gray-900 mb-2">
+        Why Flashy Cards Works
+      </h2>
+      <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+        Our approach combines scientifically-proven learning techniques with
+        modern web technology for the most effective way to learn programming.
+      </p>
+    </div>
+
+    <div class="mt-10">
+      <div class="grid grid-cols-1 gap-10 lg:grid-cols-3">
+        <!-- Spaced Repetition -->
+        <div class="group relative">
+          <div
+            class="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"
+          ></div>
+          <div class="relative bg-white rounded-lg p-6 h-full">
+            <div class="flex items-center mb-4">
+              <div class="flex-shrink-0 bg-indigo-100 p-3 rounded-lg">
+                <svg
+                  class="h-6 w-6 text-indigo-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                  ></path>
+                </svg>
+              </div>
+              <h3 class="ml-3 text-lg font-medium text-gray-900">
+                Spaced Repetition
+              </h3>
+            </div>
+            <p class="text-gray-600">
+              Our algorithm intelligently schedules review sessions based on
+              your performance, optimizing memory retention with minimum effort.
+            </p>
+          </div>
+        </div>
+
+        <!-- Active Recall -->
+        <div class="group relative">
+          <div
+            class="absolute -inset-1 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"
+          ></div>
+          <div class="relative bg-white rounded-lg p-6 h-full">
+            <div class="flex items-center mb-4">
+              <div class="flex-shrink-0 bg-green-100 p-3 rounded-lg">
+                <svg
+                  class="h-6 w-6 text-green-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+                  ></path>
+                </svg>
+              </div>
+              <h3 class="ml-3 text-lg font-medium text-gray-900">
+                Active Recall
+              </h3>
+            </div>
+            <p class="text-gray-600">
+              Testing yourself strengthens memory more than passive review. Our
+              flashcards force active engagement with the material.
+            </p>
+          </div>
+        </div>
+
+        <!-- Progress Tracking -->
+        <div class="group relative">
+          <div
+            class="absolute -inset-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"
+          ></div>
+          <div class="relative bg-white rounded-lg p-6 h-full">
+            <div class="flex items-center mb-4">
+              <div class="flex-shrink-0 bg-purple-100 p-3 rounded-lg">
+                <svg
+                  class="h-6 w-6 text-purple-600"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                  ></path>
+                </svg>
+              </div>
+              <h3 class="ml-3 text-lg font-medium text-gray-900">
+                Progress Tracking
+              </h3>
+            </div>
+            <p class="text-gray-600">
+              Visualize your learning journey with detailed statistics and
+              mastery percentages for every deck and concept.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Testimonials -->
+  <div class="mb-12 bg-indigo-50 rounded-lg p-8">
+    <div class="max-w-3xl mx-auto text-center">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">What Our Users Say</h2>
+      <div class="space-y-8">
+        <div class="bg-white p-6 rounded-lg shadow">
+          <div class="flex">
+            <div class="flex-shrink-0">
+              <img
+                class="h-10 w-10 rounded-full"
+                src="https://placehold.co/80x80"
+                alt="Portrait of Sarah Johnson, a smiling web developer with curly hair"
+              />
+            </div>
+            <div class="ml-4">
+              <div class="text-base font-medium text-gray-900">
+                Sarah Johnson
+              </div>
+              <div class="text-sm text-indigo-600">Web Developer</div>
+              <div class="mt-2 text-gray-600">
+                <p>
+                  "Flashy Cards transformed how I learn new frameworks. The
+                  spaced repetition system helps me retain concepts I'd normally
+                  forget within days."
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-lg shadow">
+          <div class="flex">
+            <div class="flex-shrink-0">
+              <img
+                class="h-10 w-10 rounded-full"
+                src="https://placehold.co/80x80"
+                alt="Portrait of David Chen, a computer science student wearing glasses"
+              />
+            </div>
+            <div class="ml-4">
+              <div class="text-base font-medium text-gray-900">David Chen</div>
+              <div class="text-sm text-indigo-600">
+                Computer Science Student
+              </div>
+              <div class="mt-2 text-gray-600">
+                <p>
+                  "As a visual learner, the card format works perfectly for me.
+                  I use it daily to reinforce algorithms and data structures
+                  concepts."
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Section -->
+  <div
+    class="bg-gradient-to-r from-indigo-500 to-indigo-700 rounded-xl shadow-xl overflow-hidden"
+  >
+    <div
+      class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between"
+    >
+      <h2 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+        <span class="block">Ready to boost your coding skills?</span>
+        <span class="block text-indigo-200">Get started today.</span>
+      </h2>
+      <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
+        <div class="inline-flex rounded-md shadow">
+          <a
+            href="#"
+            class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50"
+          >
+            Create Free Account
+          </a>
+        </div>
+        <div class="ml-3 inline-flex rounded-md shadow">
+          <a
+            href="#"
+            class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 bg-opacity-60 hover:bg-opacity-70"
+          >
+            Browse Decks
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<script src={% static "js/home.js" %}></script>
+
+<script>
+console.log('{{UID}}')
+localStorage.setItem('uid', '{{UID}}'); 
+
+</script>
+{% endblock main %}
