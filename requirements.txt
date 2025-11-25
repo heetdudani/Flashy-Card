@@ -1,0 +1,4 @@
+Django==5.0  # or your version
+psycopg2-binary
+dj-database-url
+whitenoise
